@@ -1,0 +1,16 @@
+# Environment
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Runtime data (uploaded docs, vector store)
+data/
+
+# misc
+.DS_Store
+.pytest_cache/
+.freebuff/
