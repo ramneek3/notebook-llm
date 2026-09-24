@@ -1,3 +1,14 @@
+---
+title: PDF Q&A
+emoji: 📄
+colorFrom: indigo
+colorTo: purple
+sdk: streamlit
+sdk_version: 1.64.0
+app_file: app/streamlit_app.py
+pinned: false
+---
+
 # 📄 PDF Q&A
 
 Upload a PDF, ask questions about it, and get answers grounded in the document — with page citations.
