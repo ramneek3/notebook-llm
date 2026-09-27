@@ -1,12 +1,14 @@
-"""Process entrypoint.
+"""Process entrypoint for Streamlit Community Cloud.
 
 Patches the standard-library sqlite3 module with pysqlite3 BEFORE any
-Chroma import. Streamlit Community Cloud ships a system SQLite that is
-too old for Chroma; this shim is the standard fix.
+Chroma import (Streamlit Cloud's bundled SQLite is too old for Chroma),
+then runs the actual app.
 
-Streamlit runs the app with:  streamlit run <file>
-So this file simply delegates to app/streamlit_app.py.
+Streamlit executes this file with `streamlit run`, so the app is loaded
+with runpy instead of spawning another Streamlit server (that would
+fail with "Runtime instance already exists").
 """
+import runpy
 import sys
 
 try:  # pragma: no cover - environment-specific
@@ -15,8 +17,4 @@ try:  # pragma: no cover - environment-specific
 except ImportError:
     pass
 
-from streamlit.web import cli as stcli  # noqa: E402
-
-if __name__ == "__main__":
-    sys.argv = ["streamlit", "run", "app/streamlit_app.py", *sys.argv[1:]]
-    sys.exit(stcli.main())
+runpy.run_path("app/streamlit_app.py", run_name="__main__")

@@ -1,5 +1,14 @@
 """Streamlit UI: upload a PDF, ask questions, and see cited sources."""
 import sys
+
+# Streamlit Cloud ships an older SQLite than Chroma needs — swap in
+# pysqlite3 first if available (no-op everywhere else).
+try:
+    __import__("pysqlite3")
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+except ImportError:
+    pass
+
 from pathlib import Path
 
 import streamlit as st
