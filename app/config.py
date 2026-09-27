@@ -26,10 +26,10 @@ OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 CHAT_MODEL = os.getenv("CHAT_MODEL", "nvidia/nemotron-3-ultra-550b-a55b:free")
 
 # ------------------------------------------------------------- embeddings
-# "local"  -> free, offline, private (sentence-transformers MiniLM)
+# "local"  -> free, offline, private (FastEmbed ONNX — torch-free, cloud-friendly)
 # "openai" -> text-embedding-3-small via the OpenAI API
 EMBEDDING_BACKEND = os.getenv("EMBEDDING_BACKEND", "local")
-EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
+EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "BAAI/bge-small-en-v1.5")
 
 # Chunking: ~4 characters per token is a decent rule of thumb
 CHUNK_SIZE = 1200

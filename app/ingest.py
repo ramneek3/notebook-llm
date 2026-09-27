@@ -11,7 +11,8 @@ from app import config
 def get_embeddings():
     """Return the embedding model chosen by EMBEDDING_BACKEND.
 
-    - "local": sentence-transformers MiniLM — free, offline, private.
+    - "local": FastEmbed (ONNX, torch-free) — free, offline, private,
+      and small enough for 1GB-RAM hosts like Streamlit Community Cloud.
     - "openai": text-embedding-3-small — needs OPENAI_API_KEY + credits.
     """
     if config.EMBEDDING_BACKEND == "openai":
@@ -19,9 +20,9 @@ def get_embeddings():
             model=config.EMBEDDING_MODEL,
             api_key=config.require_api_key(),
         )
-    from langchain_huggingface import HuggingFaceEmbeddings
+    from langchain_community.embeddings import FastEmbedEmbeddings
 
-    return HuggingFaceEmbeddings(model_name=config.EMBEDDING_MODEL)
+    return FastEmbedEmbeddings(model_name=config.EMBEDDING_MODEL)
 
 
 def get_vectorstore(collection: str = "pdf_docs") -> Chroma:

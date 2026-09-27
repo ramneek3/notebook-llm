@@ -2,10 +2,12 @@ langchain>=0.3.7
 langchain-community>=0.3.7
 langchain-openai>=0.2.8
 langchain-chroma>=0.1.4
-langchain-huggingface>=0.1.2
-sentence-transformers>=3.0.0
+fastembed>=0.7.0
 chromadb>=0.5.23
 openai>=1.55.0
 pypdf>=5.1.0
 python-dotenv>=1.0.1
 streamlit>=1.40.0
+
+# Streamlit Community Cloud: newer sqlite3 for Chroma
+pysqlite3-binary>=0.5.4; sys_platform == "linux"
